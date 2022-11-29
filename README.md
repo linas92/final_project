@@ -1,7 +1,4 @@
 # final_project
-This is the final project.
-
-I'll use the description "readme" file to get my thoughts together and make a plan.
 
 1. Make a plan
 2. Achieve greatness
