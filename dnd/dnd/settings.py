@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # "monsters",
+    "dnd_monsters",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
