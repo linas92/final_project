@@ -11,7 +11,7 @@ class Monster(models.Model):
     name = models.CharField(_("name"), max_length=50)
     about = HTMLField(_('summary'))
     size = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True, blank=True, related_name="monsters", )
-    type = models.ManyToManyField(Type, help_text=_('Choose type(s) for this book'), verbose_name=_('type(s)'), ).
+    type = models.ManyToManyField(Type, help_text=_('Choose type(s) for this monster'), verbose_name=_('type(s)'), )
     image = models.ImageField(_("image"), upload_to='images', blank=True, null=True)
 
     def __str__(self) -> str:
@@ -71,14 +71,14 @@ class Lore(models.Model):
 
 
 
-    # book = models.ForeignKey(Book, verbose_name=_("book"), on_delete=models.CASCADE, related_name='reviews',)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
-    content = models.TextField(_("content"), max_length=10000)
+    text_ = models.TextField(_("content"), max_length=10000)
 
-    def __str__(self):
-        return f"{self.geek} on {self.book} at {self.created_at}"
+    #reikia pasidaryti __str__(self):
 
-    class Meta:
-        ordering = ('-created_at', )
-
+    
+    # class Meta:
+    #     ordering = ('-created_at', )
+    # gal ir reikes
         
+         
