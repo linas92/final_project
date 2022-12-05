@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from dnd_monsters.views import index
+from dnd_monsters.views import homepage, monsterspage, playerspage, npcpage
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("dnd_monsters.urls")),
-    path("", index, name="index")
-    
+
+    path("", homepage, name="homepage"),
+    path("monsterspage/", monsterspage, name="monsterspage"),
+    path("playerspage/", playerspage, name="playerspage"),
+    path("npcpage/", npcpage, name="npcpage"),
+
 ]
