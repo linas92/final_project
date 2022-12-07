@@ -1,0 +1,8 @@
+main {
+    background-image: url('/static/img/monster_wallpaper.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    display: grid;
+    place-items: stretch center;
+}
