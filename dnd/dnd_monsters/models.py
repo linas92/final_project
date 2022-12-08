@@ -24,21 +24,15 @@ class Size(models.Model):
 
 class Type(models.Model):
     monster_type = models.CharField(_("monster type"), max_length=200, help_text=_("Enter the type of the beast/monster"),)
-    monster_sizes = models.ForeignKey(Size, related_name="sizes", on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.monster_type
-
-    def display_monsters(self) -> str:
-        return ', '.join(monster.name for monster in self.monsters.all())
-    display_monsters.short_description = _('monsters')
 
     def link(self) -> str:
         link = reverse('type', kwargs={'type_id':self.id})
         return format_html('<a href="{link}">{type}</a>', link=link, type=self.__str__())
 
     class Meta:
-        # ordering = ["monster_tpe", ""]
         verbose_name = _("type")
         verbose_name_plural = _("types")
 
@@ -51,11 +45,11 @@ class Monster(models.Model):
     types = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True, blank=True, related_name="monsters", )
 
     def __str__(self) -> str:
-        return f"The monster is called {self.name}, size varies {self.size}, they are {self.type} type"
+        return f"{self.name}"
 
-    def display_size(self) -> str:
-        return ', '.join(size.name for size in self.size.all()[:3])
-    display_size.short_description = _('size(s)')
+    # def display_size(self) -> str:
+    #     return ', '.join(size.name for size in self.size.all()[:3])
+    # display_size.short_description = _('size(s)')
 
 
 
@@ -71,7 +65,7 @@ class Monster(models.Model):
     # huge = models.CharField(_("huge"), help_text=_("from 4,5m. up to 6m. (15ft. - 20ft.)"), )
     # Rare, but possible to encounter a 4,5m. being, or even up to 6m. (15ft. - 20ft.)
     # gargantuan = models.CharField(_("gargantuan"), help_text=_("from 6m. up to whatever (20ft. - up to whatever)"), )
-
+    # Ridiculous, but whatever man. Creatures from 6m. up to whatever size are called gargantuan (20ft. - up to whatever)
     ######### DO NOT DELETE, COPY-PASTA INTO ADMIN SIZES CATEGORY
 
 
