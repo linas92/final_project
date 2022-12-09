@@ -1,7 +1,30 @@
 {% extends 'dnd_monsters/base.html' %}
-
 {% block title %}Monsterspage | {% endblock %}
-
 {% block content %}
-Monster page
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <section class="section">
+                    <div class="columns">
+                        <div class="column is-8 is-offset-2">
+                            {% for post in posts %}
+                                <div class="content is-medium">
+                                    <a href="{% url 'post_detail' post.category.slug post.slug %}"
+                                        {% if post.image %}
+                                            <figure class="image">
+                                                <img src="{{ post.image.url }}">
+                                            </figure>
+                                        {% endif %}
+                                        <h2 class="subtitle is-4">{{post.created_at|date:"Y-m-d"}}</h2>
+                                        <h1 class="title">{{post.name}}</h1>
+                                        <p>{{post.intro}}</p>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
 {% endblock %}
