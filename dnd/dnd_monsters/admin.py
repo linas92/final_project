@@ -4,7 +4,7 @@ from . import models
 
 class MonsterAdmin(admin.ModelAdmin):
     search_fields = ["name", "sizes", "types", ]
-    list_display = ["types", "sizes", "created_at", ]
+    list_display = ["types", "sizes", "slug", "created_at", ]
     list_filter = ["types", "sizes", "created_at", ]
 
 

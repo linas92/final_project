@@ -9,6 +9,7 @@ from tinymce.models import HTMLField
 class Size(models.Model):
     size_name = models.CharField(max_length=255)
     short_description = models.TextField()
+    slug = models.SlugField()
 
     class Meta:
         ordering = ("size_name", )
@@ -17,6 +18,9 @@ class Size(models.Model):
     def __str__(self) -> str:
         return f"{self.size_name}" 
 
+    def get_absolute_url(self):
+        return "/%s/" % self.slug
+
     def link_filtered_monsters(self):
         link = reverse('monsters')+'?size_id='+str(self.id)
         return format_html('<a class="size" href="{link}">{monster_size}</a>', link=link, name=self.monster_size)
@@ -24,10 +28,14 @@ class Size(models.Model):
 
 class Type(models.Model):
     monster_type = models.CharField(_("monster type"), max_length=200, help_text=_("Enter the type of the beast/monster"),)
+    slug = models.SlugField()
     # CombatClass foreign key
 
     def __str__(self) -> str:
         return self.monster_type
+
+    def get_absolute_url(self):
+        return "/%s/" % self.slug
 
     def link(self) -> str:
         link = reverse('type', kwargs={'type_id':self.id})
@@ -38,6 +46,7 @@ class Monster(models.Model):
     name = models.CharField(_("name"), max_length=50)
     about = HTMLField(_('summary'))
     image = models.ImageField(_("image"), upload_to='images', blank=True, null=True)
+    slug = models.SlugField()
     sizes = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True, blank=True, related_name="monsters", )
     types = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True, blank=True, related_name="monsters", )
     # CombatClass foreign key
@@ -49,23 +58,18 @@ class Monster(models.Model):
     def __str__(self) -> str:
         return f"{self.name} {self.types} {self.sizes}"
 
+    def get_absolute_url(self):
+        return "/%s/" % self.slug
+
     def display_size(self) -> str:
         return ', '.join(size.name for size in self.size.all()[:3])
     display_size.short_description = _('size(s)')
 
 
 
-    ################## DO NOT DELETE, COPY-PASTA INTO ADMIN SIZES CATEGORY
-
-    # Gargantuan From 6m. up to whatever size (20ft. - up to whatever)
-    # Huge From 4,5m. up to 6m. (15ft. - 20ft.)
-    # Large From 3m. up to 4,5m. (10ft. - 15ft.)
-    # Medium From 1,5m. up to 3m. (5ft. - 10ft.)
-    # Small From 75cm. up to 1,5m. (2,5ft. - 5ft.)
-    # Tiny From 0cm. up to 75cm. (0ft. - 2,5ft.) It's DnD, whatever floats your boat, imagination is infinite
-
 
 #       MAKE ANOTHER FIELD FOR LEVELS, HAVE IT HAVE A FOREIGNKEY-> SIZES AND MONSTERS
+
 # class Level(models.Model):
 #     level = models.CharField("")
 #     level = models.ForeignKey(Monster, verbose_name=_("monster"), on_delete=models.CASCADE, related_name='append',)
@@ -81,10 +85,15 @@ class Monster(models.Model):
 #         ordering = ('-created_at', )
 
 #         #MAKE A POSSIBILITY TO COMMENT ON A MONSTER
-# class Comment(models.Model):
-#     pass
+class Comment(models.Model):
+    monster = models.ForeignKey(Monster, related_name="comments", on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
-        # 
+
+
 # class Abilities(models.Model):
 #     pass
 # CombatClass foreign key
