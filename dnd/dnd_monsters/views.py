@@ -22,7 +22,8 @@ def detail(request, type_slug, slug):
     return render(request, "dnd_monsters/detail.html", {"monster": monster, "form":form})
 
 def homepage(request):
-    return render(request, "dnd_monsters/homepage.html")
+    monsters = models.Monster.objects.all()
+    return render(request, "dnd_monsters/homepage.html", {"monsters": monsters})
 
 def monsterspage(request):
     monsters = models.Monster.objects.all()
