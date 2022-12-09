@@ -1,5 +1,7 @@
 {% extends 'dnd_monsters/base.html' %}
+
 {% block title %}Monsterspage | {% endblock %}
+
 {% block content %}
     <section class="hero">
         <div class="hero-body">
@@ -7,17 +9,17 @@
                 <section class="section">
                     <div class="columns">
                         <div class="column is-8 is-offset-2">
-                            {% for post in posts %}
+                            {% for monster in monsters %}
                                 <div class="content is-medium">
-                                    <a href="{% url 'post_detail' post.category.slug post.slug %}"
-                                        {% if post.image %}
+                                    {% comment %} <a href="{% url 'monster_detail' monster.type.slug monster.slug %}" {% endcomment %}
+                                        {% if monster.image %}
                                             <figure class="image">
-                                                <img src="{{ post.image.url }}">
+                                                <img src="{{ monster.image.url }}">
                                             </figure>
                                         {% endif %}
-                                        <h2 class="subtitle is-4">{{post.created_at|date:"Y-m-d"}}</h2>
-                                        <h1 class="title">{{post.name}}</h1>
-                                        <p>{{post.intro}}</p>
+                                        <h2 class="subtitle is-4">{{monster.created_at|date:"Y-m-d"}}</h2>
+                                        <h1 class="title">{{monster.name}}</h1>
+                                        <p>{{monster.about}}</p>
                                     </a>
                                 </div>
                             {% endfor %}

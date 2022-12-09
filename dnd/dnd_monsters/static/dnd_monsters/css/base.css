@@ -6,3 +6,12 @@ main {
     display: grid;
     place-items: stretch center;
 }
+footer img {
+    max-height: 5rem;
+}
+footer {
+    background-color: #ccc;
+    display: grid;
+    place-items: stretch center;
+    /* grid-column: span 2; */
+}
