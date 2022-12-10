@@ -3,5 +3,30 @@
 {% block title %}NPC's | {% endblock %}
 
 {% block content %}
-NPC's page
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <section class="section">
+                    <div class="columns">
+                        <div class="column is-8 is-offset-2">
+                            {% for monster in monsters %}
+                                <div class="content is-medium">
+                                    <a href="{% url 'monster_detail' monster.type.slug monster.slug %}">
+                                        {% if monster.image %}
+                                            <figure class="image">
+                                                <img src="{{ monster.image.url }}">
+                                            </figure>
+                                        {% endif %}
+                                        <h2 class="subtitle is-4">{{ monster.created_at|timesince }} ago</h2>
+                                        <h1 class="title">{{ monster.name }}</h1>
+                                        <p>{{ monster.about }}</p>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
 {% endblock %}

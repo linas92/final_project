@@ -13,19 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from dnd_monsters.views import homepage, monsterspage, playerspage, npcpage
+from dnd_monsters.views import homepage, monsterspage, playerspage, npcpage, type
 
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
-    path("monsterspage/", monsterspage, name="monsterspage"),
-    path("playerspage/", playerspage, name="playerspage"),
-    path("npcpage/", npcpage, name="npcpage"),
-    path("", include("dnd_monsters.urls")),
-    path("", homepage, name="homepage"),
 
+    path("type/",           type,           name="type"), 
+    path("npcpage/",        npcpage,        name="npcpage"),
+    path("playerspage/",    playerspage,    name="playerspage"), 
+    path("monsterspage/",   monsterspage,   name="monsterspage"), 
+
+    path("", include("gamemaster.urls")),
+    path("", homepage, name="homepage"), 
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

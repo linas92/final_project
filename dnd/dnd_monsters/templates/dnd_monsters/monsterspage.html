@@ -1,5 +1,7 @@
 {% extends 'dnd_monsters/base.html' %}
+
 {% block title %}Monsterpage | {% endblock %}
+
 {% block content %}
     <section class="hero">
         <div class="hero-body">
@@ -15,7 +17,6 @@
                                                 <img src="{{ monster.image.url }}">
                                             </figure>
                                         {% endif %}
-
                                         <h2 class="subtitle is-4">{{ monster.created_at|timesince }} ago</h2>
                                         <h1 class="title">{{ monster.name }}</h1>
                                         <p>{{ monster.about }}</p>
