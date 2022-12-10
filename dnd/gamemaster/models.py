@@ -25,7 +25,7 @@ class Size(models.Model):
     class Meta:
         ordering = ("size", )
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.size
 
     # def get_absolute_url(self):
@@ -57,13 +57,13 @@ class Monster(models.Model):
     class Meta:
         ordering = ("-created_at", )
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return "/%s/%s/" % (self.type.slug, self.slug)
 
-    # def display_size(self) -> str:
+    # def display_size(self):
     #     return ', '.join(size.name for size in self.size.all()[:3])
     # display_size.short_description = 'size(s)'
 

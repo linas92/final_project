@@ -11,7 +11,6 @@ class MonsterAdmin(admin.ModelAdmin):
     search_fields = ["name", "size", "type", ]
     list_display = ["type", "size", "slug", "created_at", "status", ]
     list_filter = ["type", "size", "created_at", "status", ]
-    prepopulated_fields = {"slug": ("name",)}
     inlines = [CommentItemInLine]
     prepopulated_fields = {"slug": ("name",)}
 
@@ -20,7 +19,6 @@ class TypeAdmin(admin.ModelAdmin):
     search_fields = ["name", ]
     prepopulated_fields = {"slug": ("name",)}
 
-
 class CommentAdmin(admin.ModelAdmin):
     list_display = ["name", "monster", "created_at", ]
 
@@ -28,7 +26,6 @@ class CommentAdmin(admin.ModelAdmin):
 class SizeAdmin(admin.ModelAdmin):
     search_fields = ["size", ]
     prepopulated_fields = {"slug": ("size",)}
-
 
 
 admin.site.register(models.Comment, CommentAdmin)

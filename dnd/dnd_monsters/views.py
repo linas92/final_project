@@ -10,7 +10,7 @@ def monsterspage(request):
     return render(request, "dnd_monsters/monsterspage.html", {"monsters": monsters})
 
 def type(request):
-    return render(request, "dnd_monsters/type.html")
+    return render(request, "gamemaster/type.html")
 
 def playerspage(request):
     return render(request, "dnd_monsters/playerspage.html")

@@ -20,13 +20,13 @@ def detail(request, type_slug, slug):
     else:
         form = CommentForm()
 
-    return render(request, "gamemaster/detail.html", {"monster": monster, "form":form})
+    return render(request, "gamemaster/detail.html", {"monster": monster, "form": form})
 
 def type(request, slug):
-    type = get_object_or_404(Type , slug=slug)
+    type = get_object_or_404(Type, slug=slug)
     monsters = type.monsters.filter(status=Monster.ACTIVE)
 
-    return render(request, "gamemaster/type.html", {"type": type, "monsters": monsters, }) 
+    return render(request, "gamemaster/type.html", {"type": type, "monsters": monsters}) 
 
 def search(request):
     query = request.GET.get("query", "")
