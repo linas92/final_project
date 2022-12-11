@@ -13,7 +13,7 @@ def detail(request, type_slug, slug):
 
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.monster = monster
+            comment.post = monster
             comment.save()
 
             return redirect("monster_detail", slug=slug)
