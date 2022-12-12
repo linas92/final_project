@@ -25,12 +25,10 @@ from dnd_monsters.views import homepage, monsterspage, playerspage, npcpage, typ
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-
     path("type/",           type,           name="type"), 
     path("npcpage/",        npcpage,        name="npcpage"),
     path("playerspage/",    playerspage,    name="playerspage"), 
     path("monsterspage/",   monsterspage,   name="monsterspage"), 
-
     path("", include("gamemaster.urls")),
     path("", homepage, name="homepage"), 
     

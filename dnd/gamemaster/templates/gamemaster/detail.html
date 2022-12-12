@@ -7,7 +7,6 @@
     <div class="hero-body">
         <div class="container">
             <div class="section">
-                
                 <div class="columns">
                     <div class="column is-8 is-offset-2">
                         <div class="content is-medium">
@@ -16,27 +15,21 @@
                                     <img src="{{ monster.image.url }}">
                                 </figure>
                             {% endif %}
-                            
                             <h2 class="subtitle is-4">{{ monster.created_at|date:"Y-m-d" }}</h2>
                             <h2 class="title">{{ monster.name }}</h2>
                             <p><strong>{{ monster.about }}</strong></p>
-
                             <p><strong>Type: <a href="{% url "type_detail" monster.type.slug %}">{{ monster.type }}</a></strong></p>
                             <hr>
                             <h2 class="subtitle is-4">Comments</h2>
-
                                 <form method="POST" class="mb-6">
                                     {% csrf_token %}
-
                                     {{ form.as_p }}
-
                                     <div class="field">
                                         <div class="control">
                                             <button class="button is-success">Submit comment</button>
                                         </div>
                                     </div>
                                 </form>
-
                             {% for comment in monster.comments.all %}
                                 <article class="media box">
                                     <div class="media-content">
